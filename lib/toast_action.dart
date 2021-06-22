@@ -1,13 +1,13 @@
 part of 'utopic_toast.dart';
 
 class ToastAction {
-  final String label;
-  final Color textColor;
-  final Color disabledTextColor;
-  final void Function(void Function()) onPressed;
+  final String? label;
+  final Color? textColor;
+  final Color? disabledTextColor;
+  final void Function(void Function())? onPressed;
 
   const ToastAction({
-    Key key,
+    Key? key,
     this.onPressed,
     this.disabledTextColor,
     this.label,
@@ -18,8 +18,8 @@ class ToastAction {
     return Padding(
       padding: const EdgeInsets.only(left: 8.0),
       child: TextButton(
-        onPressed: () => onPressed(hideToast),
-        child: Text(label),
+        onPressed: () => onPressed!(hideToast),
+        child: Text(label!),
       ),
     );
   }

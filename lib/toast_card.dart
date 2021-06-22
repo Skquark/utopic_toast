@@ -1,29 +1,28 @@
 part of 'utopic_toast.dart';
 
 class _ToastCard extends StatelessWidget {
-  final String message;
-  final ToastAction action;
-  final ToastType type;
+  final String? message;
+  final ToastAction? action;
+  final ToastType? type;
 
   const _ToastCard({
-    Key key,
+    required Key key,
     this.message,
     this.action,
     this.type,
-  })  : assert(key != null),
-        super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    ToastOverlay toastOverlay;
+    ToastOverlay? toastOverlay;
     try {
       toastOverlay = Provider.of<ToastOverlay>(context);
     } on ProviderNotFoundException catch (e) {
       print(e);
     }
 
-    Color backgroundColor;
-    Color textColor;
+    late Color backgroundColor;
+    Color? textColor;
     switch (type) {
       case ToastType.success:
         backgroundColor =
@@ -54,7 +53,7 @@ class _ToastCard extends StatelessWidget {
       color: backgroundColor.withOpacity(0.97),
       margin: EdgeInsets.zero,
       child: GestureDetector(
-        onTap: toastOverlay.enableTapToHide
+        onTap: toastOverlay!.enableTapToHide
             ? () => ToastManager()._hideToastByKey(key)
             : null,
         child: Padding(
@@ -64,7 +63,7 @@ class _ToastCard extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  message,
+                  message!,
                   textAlign: TextAlign.left,
                   style: TextStyle(color: textColor),
                 ),
@@ -80,9 +79,9 @@ class _ToastCard extends StatelessWidget {
       ),
     );
 
-    if (toastOverlay?.enableSwipeToDismiss != false) {
+    if (toastOverlay.enableSwipeToDismiss != false) {
       result = Dismissible(
-        key: key,
+        key: key!,
         onDismissed: (_) {
           ToastManager()._hideToastByKey(key, showAnim: false);
         },

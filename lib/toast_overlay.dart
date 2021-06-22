@@ -20,40 +20,40 @@ class ToastOverlay extends StatelessWidget {
   /// Toast successfull type background color
   ///
   /// default is [Colors.green]
-  final Color successfullBackgroundColor;
+  final Color? successfullBackgroundColor;
 
   /// Toast successfull type text color
   ///
   /// default is [Colors.white] with opacity 0.87
-  final Color successfullTextColor;
+  final Color? successfullTextColor;
 
   /// Toast warning type background color
   /// default is [Colors.deepOrange]
-  final Color warningBackgroundColor;
+  final Color? warningBackgroundColor;
 
   /// Toast warning type text color
   ///
   /// default is [Colors.white] with opacity 0.87
-  final Color warningTextColor;
+  final Color? warningTextColor;
 
   /// Toast error type background color
   /// default is [Colors.red]
-  final Color errorBackgroundColor;
+  final Color? errorBackgroundColor;
 
   /// Toast error type text color
   ///
   /// default is [Colors.white] with opacity 0.87
-  final Color errorTextColor;
+  final Color? errorTextColor;
 
   /// Toast normal notification type background color
   ///
   /// default is inversed theme card color
-  final Color normalBackgroundColor;
+  final Color? normalBackgroundColor;
 
   /// Toast normal notification type text color
   ///
   /// default is inversed theme text color
-  final Color normalTextColor;
+  final Color? normalTextColor;
 
   /// Is toast should be wrapped with Dismissible
   ///
@@ -65,10 +65,10 @@ class ToastOverlay extends StatelessWidget {
   /// default is [false]
   final bool enableTapToHide;
 
-  final Widget child;
+  final Widget? child;
 
   const ToastOverlay({
-    Key key,
+    Key? key,
     this.child,
     this.successfullBackgroundColor,
     this.successfullTextColor,
@@ -91,7 +91,7 @@ class ToastOverlay extends StatelessWidget {
       child: Stack(
         alignment: Alignment.topCenter,
         children: [
-          child,
+          child!,
           SafeArea(
             child: Theme(
               data: _generateInverseTheme(context),
@@ -121,7 +121,7 @@ class ToastOverlay extends StatelessWidget {
                             sizeFactor: animation,
                             child: FadeTransition(
                               opacity: animation,
-                              child: toastsSnapshot.data
+                              child: toastsSnapshot.data!
                                   .elementAt(index)
                                   ._toastCard,
                             ),

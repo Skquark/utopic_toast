@@ -13,16 +13,12 @@ class ToastManager {
   final BehaviorSubject<List<ToastFuture>> _toastsController =
       BehaviorSubject<List<ToastFuture>>.seeded([]);
 
-  ToastFuture showToast(
-    String message, {
+  ToastFuture? showToast(
+    String? message, {
     ToastType type = ToastType.notification,
-    ToastAction action,
+    ToastAction? action,
     Duration duration = const Duration(seconds: 4),
   }) {
-    if (_toastsController == null) {
-      print('Toast manager is not initialized');
-      return null;
-    }
     if (message == null) {
       print('No message');
       return null;
@@ -38,7 +34,7 @@ class ToastManager {
     );
 
     _toastAnimatedListKey.currentState?.insertItem(0);
-    _toastsController?.add([
+    _toastsController.add([
       toastFuture,
       ..._toastsController.value,
     ]);
@@ -50,16 +46,12 @@ class ToastManager {
     return toastFuture;
   }
 
-  void hideToast(ToastFuture toastFuture, {showAnim = true}) async {
-    if (_toastsController == null) {
-      print('Toast manager is not initialized');
-      return;
-    }
+  void hideToast(ToastFuture? toastFuture, {showAnim = true}) async {
     if (toastFuture == null) {
       print('No toastFuture');
       return;
     }
-    if (_toastsController.value?.contains(toastFuture) != true) {
+    if (_toastsController.value.contains(toastFuture) != true) {
       return;
     }
 
@@ -81,19 +73,15 @@ class ToastManager {
     );
   }
 
-  void _hideToastByKey(Key toastKey, {showAnim = true}) async {
-    if (_toastsController == null) {
-      print('Toast manager is not initialized');
-      return;
-    }
+  void _hideToastByKey(Key? toastKey, {showAnim = true}) async {
     if (toastKey == null) {
       print('No toastFuture');
       return;
     }
-    var toastFuture = _toastsController.value?.firstWhere(
+    ToastFuture? toastFuture = _toastsController.value.firstWhere(
       (toastFuture) => toastFuture._toastCard.key == toastKey,
-      orElse: () => null,
     );
+
     hideToast(toastFuture, showAnim: showAnim);
   }
 }
