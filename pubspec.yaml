@@ -8,8 +8,8 @@ environment:
   flutter: ">2.0.0"
 
 dependencies:
-  rxdart: ^0.27.0
-  provider: ^5.0.0
+  rxdart:
+  provider:
 
   flutter:
     sdk: flutter
