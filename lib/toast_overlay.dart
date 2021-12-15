@@ -98,7 +98,7 @@ class ToastOverlay extends StatelessWidget {
               child: ConstrainedBox(
                 constraints: BoxConstraints(maxWidth: 400),
                 child: StreamBuilder<List<ToastFuture>>(
-                  stream: ToastManager()._toastsController,
+                  stream: ToastManager()._toastsController!,
                   builder: (context, toastsSnapshot) {
                     return AnimatedList(
                       key: ToastManager()._toastAnimatedListKey,
@@ -121,9 +121,7 @@ class ToastOverlay extends StatelessWidget {
                             sizeFactor: animation,
                             child: FadeTransition(
                               opacity: animation,
-                              child: toastsSnapshot.data!
-                                  .elementAt(index)
-                                  ._toastCard,
+                              child: toastsSnapshot.data!.elementAt(index)._toastCard,
                             ),
                           ),
                         );
@@ -144,12 +142,8 @@ class ToastOverlay extends StatelessWidget {
     final ColorScheme colorScheme = theme.colorScheme;
     final bool isThemeDark = theme.brightness == Brightness.dark;
 
-    final Brightness brightness =
-        isThemeDark ? Brightness.light : Brightness.dark;
-    final Color themeBackgroundColor = isThemeDark
-        ? colorScheme.onSurface
-        : Color.alphaBlend(
-            colorScheme.onSurface.withOpacity(0.80), colorScheme.surface);
+    final Brightness brightness = isThemeDark ? Brightness.light : Brightness.dark;
+    final Color themeBackgroundColor = isThemeDark ? colorScheme.onSurface : Color.alphaBlend(colorScheme.onSurface.withOpacity(0.80), colorScheme.surface);
 
     return ThemeData(
       cardTheme: theme.cardTheme,
@@ -158,8 +152,7 @@ class ToastOverlay extends StatelessWidget {
       colorScheme: ColorScheme(
         primary: colorScheme.onPrimary,
         primaryVariant: colorScheme.onPrimary,
-        secondary:
-            isThemeDark ? colorScheme.primaryVariant : colorScheme.secondary,
+        secondary: isThemeDark ? colorScheme.primaryVariant : colorScheme.secondary,
         secondaryVariant: colorScheme.onSecondary,
         surface: colorScheme.onSurface,
         background: themeBackgroundColor,

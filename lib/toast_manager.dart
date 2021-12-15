@@ -11,7 +11,7 @@ class ToastManager {
 
   final _toastAnimatedListKey = GlobalKey<AnimatedListState>();
   //ignore: close_sinks
-  final BehaviorSubject<List<ToastFuture>?>? _toastsController = BehaviorSubject<List<ToastFuture>>.seeded([]);
+  final BehaviorSubject<List<ToastFuture>>? _toastsController = BehaviorSubject<List<ToastFuture>>.seeded([]);
 
   ToastFuture? showToast(
     String? message, {
