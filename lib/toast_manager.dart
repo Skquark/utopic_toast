@@ -11,7 +11,7 @@ class ToastManager {
 
   final _toastAnimatedListKey = GlobalKey<AnimatedListState>();
   //ignore: close_sinks
-  final BehaviorSubject<List<ToastFuture>>? _toastsController = BehaviorSubject<List<ToastFuture>>.seeded([]);
+  final BehaviorSubject<List<ToastFuture>?>? _toastsController = BehaviorSubject<List<ToastFuture>>.seeded([]);
 
   ToastFuture? showToast(
     String? message, {
@@ -36,7 +36,7 @@ class ToastManager {
     _toastAnimatedListKey.currentState?.insertItem(0);
     _toastsController!.add([
       toastFuture,
-      ..._toastsController!.value,
+      ..._toastsController!.value!,
     ]);
 
     Future.delayed(duration, () {
@@ -51,12 +51,12 @@ class ToastManager {
       print('No toastFuture');
       return;
     }
-    if (_toastsController!.value.contains(toastFuture) != true) {
+    if (_toastsController!.value!.contains(toastFuture) != true) {
       return;
     }
 
     _toastAnimatedListKey.currentState?.removeItem(
-      _toastsController!.value.indexOf(toastFuture),
+      _toastsController!.value!.indexOf(toastFuture),
       (context, animation) {
         return SizeTransition(
           sizeFactor: animation,
@@ -69,7 +69,7 @@ class ToastManager {
       duration: showAnim ? Duration(milliseconds: 300) : Duration.zero,
     );
     _toastsController!.add(
-      _toastsController!.value..remove(toastFuture),
+      _toastsController!.value!..remove(toastFuture),
     );
   }
 
@@ -78,7 +78,7 @@ class ToastManager {
       print('No toastFuture');
       return;
     }
-    ToastFuture? toastFuture = _toastsController!.value.firstWhere(
+    ToastFuture? toastFuture = _toastsController!.value!.firstWhere(
       (toastFuture) => toastFuture._toastCard.key == toastKey,
     );
 
