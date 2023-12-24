@@ -151,7 +151,7 @@ class ToastOverlay extends StatelessWidget {
       backgroundColor: themeBackgroundColor,
       colorScheme: ColorScheme(
         primary: colorScheme.onPrimary,
-        primaryVariant: colorScheme.onPrimary,
+        primaryContainer: colorScheme.onPrimary,
         secondary: isThemeDark ? colorScheme.primaryVariant : colorScheme.secondary,
         secondaryVariant: colorScheme.onSecondary,
         surface: colorScheme.onSurface,
