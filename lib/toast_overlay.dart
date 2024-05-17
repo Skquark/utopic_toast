@@ -148,7 +148,6 @@ class ToastOverlay extends StatelessWidget {
     return ThemeData(
       cardTheme: theme.cardTheme,
       brightness: brightness,
-      backgroundColor: themeBackgroundColor,
       colorScheme: ColorScheme(
         primary: colorScheme.onPrimary,
         primaryContainer: colorScheme.onPrimary,
